@@ -1,0 +1,44 @@
+﻿@model GreenRiverMedia_ComparisonApp.Models.ItemViewModel
+
+
+@{
+    AjaxOptions ajaxOptions = new AjaxOptions
+    {
+        HttpMethod = "POST",
+        InsertionMode = InsertionMode.Replace,
+        UpdateTargetId = "form_comp",
+        OnSuccess = "onSuccess",
+    };
+
+    var firstElement = Model.pairsOfItems.Item1;
+    var secondElement = Model.pairsOfItems.Item2;
+
+}
+
+
+
+<div id="container_comparison">
+    <p id="header">Write the value of the Item</p>
+    <p id="caption">Who has the highest value, will get the Score +1</p>
+    @using (Ajax.BeginForm("Comparison", "Item", ajaxOptions))
+    {
+        @Html.AntiForgeryToken();
+
+        <div id="form_comp">
+            @Html.Partial("~/Views/Shared/_ComparisonForm.cshtml", Model)
+        </div>
+
+    }
+</div>
+
+@section scripts {
+    <script>
+        var onSuccess = function (result) {
+            $.validator.unobtrusive.parse('form');
+            if (result.url) {
+                window.location.href = result.url;
+            }
+        }
+
+    </script>
+    } 

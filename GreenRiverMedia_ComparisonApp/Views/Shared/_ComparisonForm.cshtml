@@ -1,0 +1,40 @@
+﻿@model GreenRiverMedia_ComparisonApp.Models.ItemViewModel
+
+@{
+    var firstElement = Model.pairsOfItems.Item1;
+    var secondElement = Model.pairsOfItems.Item2;
+}
+
+<div class="p_comparison">
+    <div class="input_group">
+        <div class="div_item_input">
+            <input id="positionOfFirst"
+                   name="positionOfFirst"
+                   type="hidden"
+                   value="@firstElement.Id" />
+            <p id="first_p">@firstElement.Name</p>
+            <div class="input_group_item">
+                @Html.TextBoxFor(model => model.valueOfFirst, new { name = "valueOfFirst" })
+                @Html.ValidationMessageFor(model => model.valueOfFirst)
+            </div>
+        </div>
+        <div class="div_item_input">
+            <input id="positionOfSecond"
+                   name="positionOfSecond"
+                   type="hidden"
+                   value="@secondElement.Id" />
+            <div class="input_group_item">
+                @Html.TextBoxFor(model => model.valueOfSecond, new { name = "valueOfSecond" })
+                @Html.ValidationMessageFor(model => model.valueOfSecond)
+            </div>
+            <p id="second_p">@secondElement.Name</p>
+        </div>
+    </div>
+    <div>
+        <input id="counter"
+               name="counter"
+               type="hidden"
+               value="@Model.counter" />
+        <input type="submit" class="btn btn-dark" id="btn_next" value="Next" />
+    </div>
+</div>

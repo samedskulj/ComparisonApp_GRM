@@ -1,0 +1,44 @@
+﻿@model IEnumerable<GreenRiverMedia_ComparisonApp.Models.Item>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Items from List</h2>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                Position
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Name)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Score)
+            </th>
+        </tr>
+    </thead>
+
+@foreach (var item in Model.Select((value, i) => new { i, value })) { //Da bih dobio index koristio sam rješenje od Iana Mercera postavljeno na Phil Haack's Blogu
+    <tr>
+        <td>
+            @item.i
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.value.Name)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.value.Score)
+        </td>
+       
+    </tr>
+}
+
+</table>
+
+<div class="form_show" id="form_comparison">
+    <h4>Show form for comparison of the items!</h4>
+    <button type="button" class="btn btn-dark" id="btn_form">@Html.ActionLink("See form", "Comparison")</button>
+</div>
